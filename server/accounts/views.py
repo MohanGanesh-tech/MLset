@@ -1,28 +1,30 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-# from .models import User
-from .serializers import *
-from rest_framework.permissions import  IsAuthenticated
+from .serializers import UserSerializer
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 from django.core.mail import send_mail
+# from .models import User
 # import re
 # import csv, io
+
+
 def listToString(s):
-    str1 = " " 
-    return (str1.join(s)) 
+    str1 = " "
+    return (str1.join(s))
+
 
 class user_signup(APIView):
     def post(self, request):
-        serializer = UserSerializer(data = request.data)
+        serializer = UserSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response({"status" : 403, "errors" : serializer.errors, "message" : "Something went wrong"})
+            return Response({"status": 403, "errors": serializer.errors, "message": "Something went wrong"})
         serializer.save()
         user_obj = User.objects.get(email=serializer.data['email'])
         refresh = RefreshToken.for_user(user_obj)
-        
         try:
             text = []
             text.append("Hello ")
@@ -36,19 +38,20 @@ class user_signup(APIView):
             To_mail = [serializer.data['email']]
             send_mail(Subject, Main_Text, From_mail, To_mail, fail_silently=False)
 
-            return Response({"status" : 200,
-            "payload" : serializer.data,
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            "message" : "succesfully added and welcome email sent"})
+            return Response({"status": 200,
+                             "payload": serializer.data,
+                             "refresh": str(refresh),
+                             "access": str(refresh.access_token),
+                             "message": "succesfully added and welcome email sent"})
 
         except Exception as e:
             print(e)
-            return Response({"status" : 200,
-            "payload" : serializer.data,
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            "message" : "succesfully added but error in sending email"})
+            return Response({"status": 200,
+                             "payload": serializer.data,
+                             'refresh': str(refresh),
+                             'access': str(refresh.access_token),
+                             "message": "succesfully added but error in sending email"})
+
 
 class user_api(APIView):
     authentication_classes = [JWTAuthentication]
@@ -59,29 +62,29 @@ class user_api(APIView):
             if request.GET.get('email'):
                 user_obj = User.objects.get(email=request.GET.get('email'))
                 serializer = UserSerializer(user_obj)
-                return Response({"status" : 200, "payload" : serializer.data})
+                return Response({"status": 200, "payload": serializer.data})
             else:
                 user_obj = User.objects.all()
                 serializer = UserSerializer(user_obj, many=True)
-                return Response({"status" : 200, "payload" : serializer.data})
+                return Response({"status": 200, "payload": serializer.data})
         except Exception as e:
-            return Response({'status' : 403, "message" : str(e)})
+            return Response({'status': 403, "message": str(e)})
 
     def patch(self, request, email):
         try:
             user_obj = User.objects.get(email=email)
-            serializer = UserSerializer(user_obj, data = request.data, partial = True)
+            serializer = UserSerializer(user_obj, data=request.data, partial=True)
             if not serializer.is_valid():
-                return Response({"status" : 403, "errors" : serializer.errors, "message" : "Something went wrong"})
+                return Response({"status": 403, "errors": serializer.errors, "message": "Something went wrong"})
             serializer.save()
-            return Response({"status" : 200, "payload" : serializer.data, "message" : "succesfully updated"})
+            return Response({"status": 200, "payload": serializer.data, "message": "succesfully updated"})
         except Exception as e:
-            return Response({'status' : 403, "message" : str(e)})
+            return Response({'status': 403, "message": str(e)})
 
     def delete(self, request, email):
         try:
             user_obj = User.objects.get(email=email)
             user_obj.delete()
-            return Response({"status" : 200, "message" : "succesfully deleted"})
+            return Response({"status": 200, "message": "succesfully deleted"})
         except Exception as e:
-            return Response({'status' : 403, "message" : str(e)})
+            return Response({'status': 403, "message": str(e)})
