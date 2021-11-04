@@ -1,0 +1,24 @@
+.homeimage{
+    background-image: url("../assets/desk.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    top: -25px;
+    text-align: center;
+}
+
+.landingtxt{
+    padding-top: 200px;
+}
+
+.btncenter1{
+    margin: 0;
+    position: relative;
+    width: 150px;
+    height: 30px;
+    border: none;
+    background-color: aquamarine;
+    border-radius: 20px;
+}
