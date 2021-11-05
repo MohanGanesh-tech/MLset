@@ -100,7 +100,7 @@ DATABASES = {
 #         'HOST': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'PORT': 5432,
+#         'PORT': 5432,
     }
 }
 
