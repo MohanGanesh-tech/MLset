@@ -14,7 +14,7 @@ def listToString(s):
     return (str1.join(s))
 
 
-class user_signup(APIView):
+class user_auth(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if not serializer.is_valid():
@@ -40,23 +40,23 @@ class user_signup(APIView):
                          "access": str(refresh.access_token),
                          "message": "succesfully added and welcome email sent"})
 
-
-class user_api(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
     def get(self, request):
         try:
             if request.GET.get('email'):
                 user_obj = User.objects.get(email=request.GET.get('email'))
                 serializer = UserSerializer(user_obj)
                 return Response({"status": 200, "payload": serializer.data})
-            elif (request.GET.get('email')) != "":
+            else:
                 user_obj = User.objects.all()
                 serializer = UserSerializer(user_obj, many=True)
                 return Response({"status": 200, "payload": serializer.data})
         except Exception as e:
             return Response({'status': 403, "message": str(e)})
+
+
+class user_api(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def patch(self, request):
         try:
