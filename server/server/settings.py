@@ -84,27 +84,27 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Local postgres setup
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'MLsetdb',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'PORT': 5432,
-    }
-}
-
-# Github postgres setup
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
+#         'NAME': 'MLsetdb',
 #         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
+#         'PASSWORD': 'root',
 #         'PORT': 5432,
 #     }
 # }
+
+# Github postgres setup
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
+}
 
 # Docker postgres setup
 # DATABASES = {
