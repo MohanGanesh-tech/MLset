@@ -27,4 +27,4 @@ jobs:
         pip install -r server/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python server/manage.py test
