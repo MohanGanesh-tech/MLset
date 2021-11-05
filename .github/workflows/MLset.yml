@@ -21,8 +21,6 @@ jobs:
           - 5432:5432
     strategy:
       max-parallel: 4
-      matrix:
-        python-version: [3.8]
     defaults:
       run:
         working-directory: ./server
@@ -30,15 +28,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
     - name: Install Dependencies
       run: |
-        ls
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Lint with flake8
       run: |
-        python manage.py test
+        pip install flake8
+        flake8
+    - name: Coverage report
+      run: |
+        pip install coverage
+        coverage run manage.py test
+        coverage report
+    - name: Django Testing
+      run: |
+        python3 manage.py test
