@@ -46,6 +46,7 @@ jobs:
       with:
         node-version: 16.x
     - run: |
+        ls -l
         cd client
         npm install
         npm run build
