@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  django:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -37,9 +36,10 @@ jobs:
     - name: Django Run
       run: |
         ifconfig
-        # cd server
-        # python3 manage.py runserver 0.0.0.0:8000
-
+        cd server
+        python3 manage.py runserver 0.0.0.0:8000
+    
+  react:
     - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
