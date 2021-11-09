@@ -1,7 +1,8 @@
-git clone https://github.com/nagarjun08/MyPortfolio.git
+git clone https://github.com/MohanGanesh-tech/MLset.git
 git pull origin main
+git push --set-upstream origin main
 
-git remote add origin https://github.com/nagarjun08/MyPortfolio.git
+git remote add origin https://github.com/MohanGanesh-tech/MLset.git
 git remote -v
 git status
 
