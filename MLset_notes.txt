@@ -1,0 +1,38 @@
+git clone https://github.com/nagarjun08/MyPortfolio.git
+git pull origin main
+
+git remote add origin https://github.com/nagarjun08/MyPortfolio.git
+git remote -v
+git status
+
+git add .
+git commit -m "message" 
+git push origin main
+
+source MLsetenv/bin/activate
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+coverage run --omit=*/venv/*,*/migrations/*,*/MLsetenv/*,*/manage.py/* manage.py test & coverage html
+coverage html
+coverage report
+
+flake8 --ignore=E501
+
+npx cypress open
+
+docker run --gpus all -it tensorflow/tensorflow:latest-gpu bash
+import tensorflow as tf
+tf.test.is_gpu_available()
+
+dvc init
+dvc remote add -d myremote gdrive://1_DFKaEQnppsunhF9-Qj0nQP5YJVv8ODL
+python get_data.py
+dvc add data.csv
+dvc push
+dvc pull data.csv
+
+
+docker run --name testgpu1 -d --gpus all -e RUNNER_IDLE_TIMEOUT=1800 -e RUNNER_LABELS=cml,gpu -e RUNNER_REPO="https://github.com/MohanGanesh-tech/wine" -e repo_token="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" tensorflow/tensorflow:latest-gpu
+
+docker run --name testgpu2 -d --gpus all -e RUNNER_IDLE_TIMEOUT=1800 -e RUNNER_LABELS=cml,gpu -e RUNNER_REPO="https://github.com/MohanGanesh-tech/wine" -e repo_token=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 tensorflow/tensorflow:latest-gpu-jupyter

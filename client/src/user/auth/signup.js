@@ -17,7 +17,7 @@ class Signup extends React.Component {
         "password": e.target.elements.password.value,
    }
 
-      await fetch("http://localhost/accounts/user_signup/", {
+      await fetch("http://localhost:8000/accounts/user_signup/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

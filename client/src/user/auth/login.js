@@ -22,7 +22,7 @@ class Login extends React.Component{
   onSubmitForm = async (event) => {
     event.preventDefault();
 
-      await axios.post("http://localhost/api/token/", {
+      await axios.post(["http://localhost:8000/api/token/"], {
         "username" : this.state.email,
         "password" : this.state.password
       })
