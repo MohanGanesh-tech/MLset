@@ -4,6 +4,11 @@ WORKDIR /django
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY . .
+RUN flake8 --ignore=E501
+RUN coverage run manage.py test
+RUN coverage report
+RUN python manage.py test
+
 
 COPY ./entrypoint.sh /
 ENTRYPOINT ["sh", "/entrypoint.sh"]
