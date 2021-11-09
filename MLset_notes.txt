@@ -13,13 +13,15 @@ source MLsetenv/bin/activate
 pip freeze > requirements.txt
 pip install -r requirements.txt
 
-coverage run --omit=*/venv/*,*/migrations/*,*/MLsetenv/*,*/manage.py/* manage.py test & coverage html
+flake8 --ignore=E501 > flake8_report.txt
+
+python manage.py test > unit_test.txt
 coverage html
 coverage report
-
-flake8 --ignore=E501
+coverage run --omit=*/venv/*,*/migrations/*,*/MLsetenv/*,*/manage.py/* manage.py test & coverage report > coverage_report.txt
 
 npx cypress open
+npx cypress run --spec "cypress/integration/MLset/MLset_end_to_end_testing.js"
 
 docker run --gpus all -it tensorflow/tensorflow:latest-gpu bash
 import tensorflow as tf
@@ -34,7 +36,4 @@ dvc pull data.csv
 
 
 docker run --name testgpu1 -d --gpus all -e RUNNER_IDLE_TIMEOUT=1800 -e RUNNER_LABELS=cml,gpu -e RUNNER_REPO="https://github.com/MohanGanesh-tech/wine" -e repo_token="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" tensorflow/tensorflow:latest-gpu
-
 docker run --name testgpu2 -d --gpus all -e RUNNER_IDLE_TIMEOUT=1800 -e RUNNER_LABELS=cml,gpu -e RUNNER_REPO="https://github.com/MohanGanesh-tech/wine" -e repo_token=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 tensorflow/tensorflow:latest-gpu-jupyter
-
-npx cypress run --spec "cypress/integration/MLset/MLset_end_to_end_testing.js"
