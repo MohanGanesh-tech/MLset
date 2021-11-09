@@ -1,4 +1,4 @@
-name: Cypress End to End Test
+name: Cypress End to End Testing
 
 on:
   push:
