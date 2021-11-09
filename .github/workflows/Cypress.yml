@@ -22,8 +22,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: ls -l
-    - run: cd client
-    - run: npm install
-    - run: npm run build
-    - run: npm run int-test
+    - run: |
+        ls -l
+        cd client
+        npm install
+        npm run build
+        npm run int-test
