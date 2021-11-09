@@ -6,6 +6,7 @@ RUN pip3 install -r requirements.txt
 COPY . .
 RUN flake8 --ignore=E501 > flake8_report.txt
 RUN cat flake8_report.txt
+RUN pip install coverage
 RUN coverage report
 RUN python manage.py test
 
