@@ -40,6 +40,9 @@ jobs:
         python3 manage.py runserver 0.0.0.0:8000
     
   react:
+    needs: django
+    runs-on: ubuntu-latest
+    steps:
     - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
