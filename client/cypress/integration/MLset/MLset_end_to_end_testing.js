@@ -5,6 +5,11 @@ describe('MLset Desktop end to end Testing', () => {
         cy.viewport(1280, 720)
     })
 
+    it.only("Testing", () =>{
+        cy.visit('http://localhost:3000')
+        cy.contains('Sign Up').click()
+    })
+
     it("Signup Page", () => {
         cy.visit('http://localhost/')
         cy.contains('Sign Up').click()
