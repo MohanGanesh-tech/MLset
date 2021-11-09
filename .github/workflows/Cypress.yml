@@ -1,4 +1,4 @@
-name: Cypress End to End Testing
+name: Cypress End to End Test
 
 on:
   push:
@@ -7,49 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  # django:
-  #   runs-on: ubuntu-latest
-    # services:
-    #   postgres:
-    #     image: postgres:latest
-    #     env:
-    #       POSTGRES_DB: postgres        
-    #       POSTGRES_PASSWORD: postgres
-    #       POSTGRES_USER: postgres
-    #     ports:
-    #       - 5432:5432
-    # strategy:
-    #   max-parallel: 4
+  build:
 
-    # steps:
-    # - uses: actions/checkout@v2
-
-    # - name: Set up Python 3.8
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.8
-    # - name: Install Dependencies
-    #   run: |
-    #     cd server
-    #     python -m pip install --upgrade pip
-    #     pip install -r requirements.txt
-    # - name: Django Run
-    #   run: |
-    #     cd server
-    #     python3 manage.py runserver 0.0.0.0:8000
-    
-  react:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
+
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
-    - name: Use Node.js 16.x
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        node-version: 16.x
-    - run: |
-        npm install
-        npm run build
-        npm run int-test
+        node-version: ${{ matrix.node-version }}
+    - run: ls -l
+    - run: cd client
+    - run: npm install
+    - run: npm run build
+    - run: npm run int-test
