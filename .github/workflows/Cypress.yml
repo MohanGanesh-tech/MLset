@@ -45,9 +45,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16.x
+      working-directory: ./client
     - run: |
-        ls -l
-        cd client
         npm install
         npm run build
         npm run int-test
