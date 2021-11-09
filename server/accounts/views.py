@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .serializers import UserSerializer
 
-
+#
 def listToString(s):
     str1 = " "
     return (str1.join(s))
