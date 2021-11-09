@@ -29,12 +29,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - name: Install Dependencies and Run
+    - name: Install Dependencies
       run: |
         cd server
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        python3 manage.py runserver 0.0.0.0:8000
+    - name: Django Run
+      run: python3 manage.py runserver 0.0.0.0:8000
 
     - name: Use Node.js 16.x
       uses: actions/setup-node@v2
