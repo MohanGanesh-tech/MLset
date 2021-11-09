@@ -6,10 +6,8 @@ RUN pip3 install -r requirements.txt
 COPY . .
 RUN flake8 --ignore=E501 > flake8_report.txt
 RUN cat flake8_report.txt
-RUN coverage report > coverage_report.txt
-RUN cat coverage_report.txt
-RUN python manage.py test > unit_test.txt
-RUN cat unit_test.txt
+RUN coverage report
+RUN python manage.py test
 
 
 COPY ./entrypoint.sh /
