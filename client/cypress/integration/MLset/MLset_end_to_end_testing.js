@@ -5,13 +5,13 @@ describe('MLset Desktop end to end Testing', () => {
         cy.viewport(1280, 720)
     })
 
-    it.only("Testing", () =>{
-        cy.visit('http://localhost:3000')
-        cy.contains('Sign Up').click()
-    })
+    // it.only("Testing", () =>{
+    //     cy.visit('http://localhost:3000')
+    //     cy.contains('Sign Up').click()
+    // })
 
     it("Signup Page", () => {
-        cy.visit('http://localhost/')
+        cy.visit('http://localhost:3000')
         cy.contains('Sign Up').click()
         cy.contains('Sign In').should('exist')
         cy.get('[id=firstname]').type('test')
@@ -36,7 +36,7 @@ describe('MLset Desktop end to end Testing', () => {
     })
 
     it("Login Page", () => {
-        cy.visit('http://localhost/')
+        cy.visit('http://localhost:3000')
         cy.get('[id=email]').type("test4@gmail.com")
         cy.get('[id=password]').type("12345")
         cy.get('[value="Log In"]').click()
