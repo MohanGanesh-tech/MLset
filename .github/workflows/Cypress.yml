@@ -9,34 +9,34 @@ on:
 jobs:
   django:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: postgres        
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-        ports:
-          - 5432:5432
-    strategy:
-      max-parallel: 4
+    # services:
+    #   postgres:
+    #     image: postgres:latest
+    #     env:
+    #       POSTGRES_DB: postgres        
+    #       POSTGRES_PASSWORD: postgres
+    #       POSTGRES_USER: postgres
+    #     ports:
+    #       - 5432:5432
+    # strategy:
+    #   max-parallel: 4
 
-    steps:
-    - uses: actions/checkout@v2
+    # steps:
+    # - uses: actions/checkout@v2
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install Dependencies
-      run: |
-        cd server
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Django Run
-      run: |
-        cd server
-        python3 manage.py runserver 0.0.0.0:8000
+    # - name: Set up Python 3.8
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.8
+    # - name: Install Dependencies
+    #   run: |
+    #     cd server
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
+    # - name: Django Run
+    #   run: |
+    #     cd server
+    #     python3 manage.py runserver 0.0.0.0:8000
     
   react:
     runs-on: ubuntu-latest
