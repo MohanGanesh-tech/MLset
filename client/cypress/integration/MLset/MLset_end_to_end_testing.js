@@ -52,7 +52,7 @@ describe('MLset Desktop end to end Testing', () => {
 // describe('MLset Mobile end to end Testing', () => {
 //     it("first test", () => {
 //         cy.viewport('iphone-5')
-//         cy.visit('http://localhost/')
+//         cy.visit('http://localhost')
 //         cy.contains('Sign Up').click()
 //     })
 // })
