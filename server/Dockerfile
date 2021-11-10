@@ -12,7 +12,7 @@ COPY . .
 
 # RUN coverage report
 # RUN python manage.py test
+CMD [ "coverage", "run", "manage.py", "test", "&", "coverage", "report" ]
 
-
-COPY ./entrypoint.sh /
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+# COPY ./entrypoint.sh /
+# ENTRYPOINT ["sh", "/entrypoint.sh"]
