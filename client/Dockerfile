@@ -7,5 +7,4 @@ COPY . .
 RUN npm run build
 
 COPY ./entrypoint.sh /
-ENTRYPOINT ["sh", "/entrypoint.sh"] >entrypoint_report.txt
-RUN cat entrypoint_report.txt
+ENTRYPOINT ["sh", "/entrypoint.sh"]

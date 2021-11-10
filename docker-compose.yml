@@ -30,7 +30,7 @@ services:
   nginx:
     container_name: mlset_nginx
     image: nginx:latest
-    # restart: always
+    restart: always
     ports:
       - 80:80
     volumes:
