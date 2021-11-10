@@ -21,5 +21,6 @@ jobs:
       - name: Cypress tests 🧪
         uses: cypress-io/github-action@v2
         with:
+          working-directory: /client
           start: npm start
 
